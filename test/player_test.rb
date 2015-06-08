@@ -18,9 +18,9 @@ class PlayerTest < Minitest::Test
     ].map {|h| SimplePoker::Card.new h}
   end
 
-  def test_best_combination
-    assert_equal 200121110, @player.best_combination.weight
-    assert_equal :pair, @player.best_combination.name
+  def test_find_best_combination
+    assert_equal 200121110, @player.find_best_combination.weight
+    assert_equal :pair, @player.find_best_combination.name
   end
 
 end

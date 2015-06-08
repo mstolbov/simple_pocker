@@ -17,6 +17,6 @@ class SimplePoker
 
   def run
     game.deal_cards
-    game.determine_winner
+    game.find_winner
   end
 end

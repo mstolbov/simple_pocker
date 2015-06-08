@@ -7,6 +7,10 @@ class SimplePoker::Game
     @deck.shuffle!
   end
 
+  def add_player(player)
+    @players << player
+  end
+
   def deal_cards
     @common_cards = @deck.get_5_cards
 
@@ -16,15 +20,8 @@ class SimplePoker::Game
     end
   end
 
-  def determine_winner
-    determine_combinations
-    players.first
+  def find_winner
+    players.max_by {|p| p.find_best_combination.weight}
   end
 
-  private
-  def determine_combinations
-    players.each do |player|
-      player.best_combination
-    end
-  end
 end
