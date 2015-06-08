@@ -30,6 +30,7 @@ class CombinationTest < Minitest::Test
       {:suit=>"hart", :kind=>"Q"}
     ].map {|h| SimplePoker::Card.new h}
     combination = SimplePoker::Combination.new(cards)
+    combination.determine
     assert_equal 6_12_11_10_9_8, combination.weight
   end
 
@@ -42,6 +43,7 @@ class CombinationTest < Minitest::Test
       {:suit=>"spade", :kind=>"2"}
     ].map {|h| SimplePoker::Card.new h}
     combination1 = SimplePoker::Combination.new(cards1)
+    combination1.determine
     assert_equal 5_03_02_01_0_0, combination1.weight
 
     cards2 = [
@@ -52,6 +54,7 @@ class CombinationTest < Minitest::Test
       {:suit=>"spade", :kind=>"J"}
     ].map {|h| SimplePoker::Card.new h}
     combination2 = SimplePoker::Combination.new(cards2)
+    combination2.determine
     assert_equal 5_12_11_10_9_8, combination2.weight
   end
 
@@ -64,6 +67,7 @@ class CombinationTest < Minitest::Test
       {:suit=>"spade", :kind=>"2"}
     ].map {|h| SimplePoker::Card.new h}
     combination1 = SimplePoker::Combination.new(cards1)
+    combination1.determine
     assert_equal 4_12_00_03_00, combination1.weight
 
     cards2 = [
@@ -74,6 +78,7 @@ class CombinationTest < Minitest::Test
       {:suit=>"spade", :kind=>"J"}
     ].map {|h| SimplePoker::Card.new h}
     combination2 = SimplePoker::Combination.new(cards2)
+    combination2.determine
     assert_equal 4_08_00_12_09, combination2.weight
   end
 
@@ -86,6 +91,7 @@ class CombinationTest < Minitest::Test
       {:suit=>"spade", :kind=>"9"}
     ].map {|h| SimplePoker::Card.new h}
     combination = SimplePoker::Combination.new(cards)
+    combination.determine
     assert_equal 3_12_11_00_07, combination.weight
   end
 
@@ -98,6 +104,7 @@ class CombinationTest < Minitest::Test
       {:suit=>"spade", :kind=>"9"}
     ].map {|h| SimplePoker::Card.new h}
     combination = SimplePoker::Combination.new(cards)
+    combination.determine
     assert_equal 2_07_12_11_10, combination.weight
   end
 
@@ -110,6 +117,7 @@ class CombinationTest < Minitest::Test
       {:suit=>"spade", :kind=>"9"}
     ].map {|h| SimplePoker::Card.new h}
     combination = SimplePoker::Combination.new(cards)
+    combination.determine
     assert_equal 1_12_00_00_00, combination.weight
   end
 
