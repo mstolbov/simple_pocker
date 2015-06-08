@@ -1,16 +1,16 @@
 class SimplePoker::Deck
-  SUITS = %i(spade heart diamond club)
-  KINDS = %i(A 2 3 4 5 6 7 8 9 T J Q K)
+  SUITS = %w(spade heart diamond club)
+  KINDS = %w(2 3 4 5 6 7 8 9 T J Q K A)
 
   attr_reader :cards
 
   def initialize
-    @cards = []
-    SUITS.each do |suit|
-      KINDS.each do |kind|
-        @cards << SimplePoker::Card.new(suit: suit, kind: kind)
-      end
+    @cards = KINDS.product(SUITS).map do |pair|
+      SimplePoker::Card.new(suit: pair[1], kind: pair[0])
     end
+  end
+
+  def shuffle!
     @cards.shuffle!
   end
 

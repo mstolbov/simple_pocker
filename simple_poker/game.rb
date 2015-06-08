@@ -4,6 +4,7 @@ class SimplePoker::Game
   def initialize(players:, deck: SimplePoker::Deck.new)
     @players = players
     @deck = deck
+    @deck.shuffle!
   end
 
   def deal_cards
@@ -23,7 +24,7 @@ class SimplePoker::Game
   private
   def determine_combinations
     players.each do |player|
-      player.combination = SimplePoker::Combination.determine(player.cards)
+      player.determine_combination
     end
   end
 end

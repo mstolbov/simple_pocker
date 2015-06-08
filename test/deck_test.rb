@@ -9,6 +9,8 @@ class DeckTest < Minitest::Test
   def test_initialize
     assert_equal @deck.cards.count, @poker_deck_count
     assert @deck.cards.first.is_a? SimplePoker::Card
+    assert_equal "spade", @deck.cards.first.suit
+    assert_equal "2", @deck.cards.first.kind
   end
 
   def test_getting_cards
