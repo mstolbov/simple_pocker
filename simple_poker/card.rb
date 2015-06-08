@@ -5,4 +5,5 @@ class SimplePoker::Card
     @suit = suit
     @kind = kind
   end
+
 end

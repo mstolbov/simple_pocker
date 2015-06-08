@@ -6,11 +6,11 @@ class SimplePoker::Player
     @name = name
   end
 
-  def determine_combination
+  def best_combination
     combinations = cards.combination(5).map do|combination|
-      SimplePoker::Combination.determine(combination)
+      SimplePoker::Combination.new(combination).weigth
     end
-    combinations
+    combinations.compact.max
   end
 
   private

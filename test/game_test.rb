@@ -17,10 +17,11 @@ class GameTest < Minitest::Test
   end
 
   def test_determine_winner
+    skip
     @game.deal_cards
 
     @game.determine_winner
-    @player.combination
+    #@player.combination
   end
 
 end

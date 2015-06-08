@@ -24,7 +24,7 @@ class SimplePoker::Game
   private
   def determine_combinations
     players.each do |player|
-      player.determine_combination
+      player.best_combination
     end
   end
 end
