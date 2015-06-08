@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+APP_PATH = File.expand_path('../../simple_poker',  __FILE__)
+require APP_PATH
+
+require 'optparse'
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: bin/simple_poker [options]"
+  opts.banner += "\nExample: bin/simple_poker --players=2"
+
+  opts.on("-p", "--players=N", Integer, "Players count") do |v|
+    options[:players_count] = v
+  end
+  opts.on("-n", "--number=N", Integer, "Number of the games") do |v|
+    options[:number] = v
+  end
+  opts.on("--log=[path]", "Path to log") do |v|
+    options[:log] = v
+  end
+
+  opts.on_tail("-h", "--help", "Show this message") do
+    puts opts
+    exit
+  end
+
+  opts.abort("See help: bin/simple_poker --help") if ARGV.empty?
+end.parse!
+
+options[:logger] = Logger.new(options.delete(:log)) if options[:log]
+
+game = SimplePoker.new(options)
+game.run_loop

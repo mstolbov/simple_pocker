@@ -7,12 +7,12 @@ class SimplePoker
 
   attr_reader :game
 
-  def initialize(players_count:, rounds: 1, logger: Logger.new(STDOUT))
+  def initialize(players_count:, number: 1, logger: Logger.new(STDOUT))
     players = []
     players_count.times do |i|
       players << Player.new(name: "Player ##{i}")
     end
-    @rounds = rounds
+    @number = number
     @logger = logger
 
     deck = Deck.new
@@ -24,6 +24,7 @@ class SimplePoker
     winner = game.find_winner
 
     @logger.info "Game result:" \
+      "\nPlayers: #{@game.players.map(&:to_s).join(", ")}" \
       "\nWinner is #{winner}" \
       "\nTable: #{@game.common_cards.map(&:to_s).join(", ")}" \
       "\nCombination: #{winner.combination}"
@@ -31,8 +32,8 @@ class SimplePoker
     winner
   end
 
-  def loop_run
-    @rounds.times { run }
+  def run_loop
+    @number.times { run }
   end
 
   def add_player(player)
