@@ -6,4 +6,8 @@ class SimplePoker::Card
     @kind = kind
   end
 
+  def to_s
+    "#{kind} #{suit}"
+  end
+
 end

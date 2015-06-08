@@ -15,6 +15,10 @@ class SimplePoker::Player
     @combination = combinations.max_by {|c| c.weight}
   end
 
+  def to_s
+    "#{name} cards: [#{personal_cards.map(&:to_s).join(", ")}]"
+  end
+
   private
   def cards
     @cards = personal_cards + common_cards

@@ -12,6 +12,10 @@ class SimplePoker::Combination
     @weight, @name = [flush, straight, set, two_pairs, pair, high_card].compact.max
   end
 
+  def to_s
+    "#{name.capitalize} \"#{cards.map(&:to_s).join(", ")}\""
+  end
+
   private
 
   def kinds
