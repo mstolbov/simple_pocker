@@ -80,17 +80,33 @@ class SimplePoker::Combination
       kiker = kinds.select {|x| !pairs.include?(x)}.last
       [
         300000000,
-        1000000 * weight_of(pairs[1]),
-        10000 * weight_of(pairs[0]),
+        1000000 * weight_of(pairs.last),
+        10000 * weight_of(pairs.first),
         weight_of(kiker),
       ].reduce(:+)
     end
   end
 
   def pair
+    pairs = kind_repeated(2).uniq
+    if pairs.count == 1
+      pair = pairs.last
+      kikers = kinds.select {|x| pair != x}
+      [
+        200000000,
+        1000000 * weight_of(pair),
+        10000 * weight_of(kikers[2]),
+        100 * weight_of(kikers[1]),
+        weight_of(kikers[0])
+      ].reduce(:+)
+    end
   end
 
   def high_card
+    [
+      100000000,
+      1000000 * weight_of(kinds[-1])
+    ].reduce(:+)
   end
 
 end

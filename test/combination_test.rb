@@ -89,4 +89,28 @@ class CombinationTest < Minitest::Test
     assert_equal 3_12_11_00_07, combination.weight
   end
 
+  def test_pair_weight
+    cards = [
+      {:suit=>"hart", :kind=>"A"},
+      {:suit=>"spade", :kind=>"Q"},
+      {:suit=>"spade", :kind=>"K"},
+      {:suit=>"hart", :kind=>"9"},
+      {:suit=>"spade", :kind=>"9"}
+    ].map {|h| SimplePoker::Card.new h}
+    combination = SimplePoker::Combination.new(cards)
+    assert_equal 2_07_12_11_10, combination.weight
+  end
+
+  def test_high_card_weight
+    cards = [
+      {:suit=>"hart", :kind=>"A"},
+      {:suit=>"spade", :kind=>"Q"},
+      {:suit=>"spade", :kind=>"K"},
+      {:suit=>"hart", :kind=>"4"},
+      {:suit=>"spade", :kind=>"9"}
+    ].map {|h| SimplePoker::Card.new h}
+    combination = SimplePoker::Combination.new(cards)
+    assert_equal 1_12_00_00_00, combination.weight
+  end
+
 end
