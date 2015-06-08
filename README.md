@@ -1,1 +1,1 @@
-# simple_pocker
+# SimplePoker
