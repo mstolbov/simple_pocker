@@ -13,6 +13,7 @@ class SimplePoker::Game
     @common_cards = @deck.get_5_cards
   end
 
-  def finish
+  def find_winner
+    players.first
   end
 end

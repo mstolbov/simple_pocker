@@ -2,6 +2,8 @@ class SimplePoker::Deck
   SUITS = %i(spade heart diamond club)
   KINDS = %i(A 2 3 4 5 6 7 8 9 T J Q K)
 
+  attr_reader :cards
+
   def initialize
     @cards = []
     SUITS.each do |suit|

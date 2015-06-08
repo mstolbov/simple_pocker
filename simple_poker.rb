@@ -18,6 +18,6 @@ class SimplePoker
   def run
     @game.deal_cards
 
-    game.players.first #test
+    game.find_winner #test
   end
 end
