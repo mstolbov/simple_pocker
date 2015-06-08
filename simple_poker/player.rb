@@ -8,7 +8,7 @@ class SimplePoker::Player
 
   def best_combination
     combinations = cards.combination(5).map do|combination|
-      SimplePoker::Combination.new(combination).weigth
+      SimplePoker::Combination.new(combination).weight
     end
     combinations.compact.max
   end

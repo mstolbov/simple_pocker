@@ -21,26 +21,39 @@ class CombinationTest < Minitest::Test
     assert_equal "hart", last_card.suit
   end
 
-  def test_flush_weigth
-    cards1 = [
+  def test_flush_weight
+    skip
+    cards = [
       {:suit=>"hart", :kind=>"T"},
       {:suit=>"hart", :kind=>"K"},
       {:suit=>"hart", :kind=>"A"},
       {:suit=>"hart", :kind=>"J"},
       {:suit=>"hart", :kind=>"Q"}
     ].map {|h| SimplePoker::Card.new h}
+    combination = SimplePoker::Combination.new(cards)
+    assert_equal 6_12_11_10_9_8, combination.weight
+  end
+
+  def test_straight_weight
+    cards1 = [
+      {:suit=>"hart", :kind=>"3"},
+      {:suit=>"spade", :kind=>"A"},
+      {:suit=>"spade", :kind=>"5"},
+      {:suit=>"hart", :kind=>"4"},
+      {:suit=>"spade", :kind=>"2"}
+    ].map {|h| SimplePoker::Card.new h}
     combination1 = SimplePoker::Combination.new(cards1)
-    assert_equal 6_12_11_10_9_8, combination1.weigth
+    assert_equal 5_03_02_01_0_0, combination1.weight
 
     cards2 = [
-      {:suit=>"spade", :kind=>"3"},
-      {:suit=>"spade", :kind=>"K"},
-      {:suit=>"spade", :kind=>"5"},
-      {:suit=>"spade", :kind=>"9"},
-      {:suit=>"spade", :kind=>"Q"}
+      {:suit=>"hart", :kind=>"K"},
+      {:suit=>"spade", :kind=>"A"},
+      {:suit=>"spade", :kind=>"Q"},
+      {:suit=>"hart", :kind=>"T"},
+      {:suit=>"spade", :kind=>"J"}
     ].map {|h| SimplePoker::Card.new h}
     combination2 = SimplePoker::Combination.new(cards2)
-    assert_equal 6_11_10_07_3_1, combination2.weigth
+    assert_equal 5_12_11_10_9_8, combination2.weight
   end
 
 end

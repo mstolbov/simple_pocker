@@ -8,9 +8,8 @@ class SimplePoker::Combination
     @cards = combination.sort {|a ,b| KINDS.index(a.kind) <=> KINDS.index(b.kind)}
   end
 
-  def weigth
-    flush
-    #[flush].max
+  def weight
+    [flush, straight].compact.max
   end
 
   private
@@ -23,7 +22,7 @@ class SimplePoker::Combination
     @cards.map {|c| c.suit}
   end
 
-  def weigth_of(val)
+  def weight_of(val)
     KINDS.index(val) || 0
   end
 
@@ -31,11 +30,29 @@ class SimplePoker::Combination
     if suits.uniq.size == 1
       [
         600000000,
-        1000000 * weigth_of(kinds[-1]),
-        10000 * weigth_of(kinds[-2]),
-        100 * weigth_of(kinds[-3]),
-        10 * weigth_of(kinds[-4]),
-        weigth_of(kinds[-5])
+        1000000 * weight_of(kinds[-1]),
+        10000 * weight_of(kinds[-2]),
+        100 * weight_of(kinds[-3]),
+        10 * weight_of(kinds[-4]),
+        weight_of(kinds[-5])
+      ].reduce(:+)
+    end
+  end
+
+  def straight
+    if kinds.last == "A" && kinds.first == "2"
+      values = ["A1"].concat kinds[0..3]
+    else
+      values = kinds
+    end
+    if (["A1"] << KINDS).join.include?(values.join)
+      [
+        500000000,
+        1000000 * weight_of(values[-1]),
+        10000 * weight_of(values[-2]),
+        100 * weight_of(values[-3]),
+        10 * weight_of(values[-4]),
+        weight_of(values[-5]) # "A1" will return 0
       ].reduce(:+)
     end
   end
