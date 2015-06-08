@@ -1,10 +1,8 @@
 # Simple Poker
-===============
+
 Texas-holdem poker game emulator
 
 # Usage
-
-How to use
 ```
 Usage: bin/simple_poker [options]
 Example: bin/simple_poker --players=2
@@ -16,7 +14,6 @@ Example: bin/simple_poker --players=2
 
 # Testing
 
-How to test
 ```
 rake test
 ```
