@@ -9,7 +9,7 @@ class SimplePoker::Combination
   end
 
   def weight
-    [flush, straight, set].compact.max
+    [flush, straight, set, two_pairs, pair, high_card].compact.max
   end
 
   private
@@ -27,7 +27,7 @@ class SimplePoker::Combination
   end
 
   def kind_repeated(n)
-    kinds.select {|x| kinds.count(x) == n}.last
+    kinds.select {|x| kinds.count(x) == n}
   end
 
   def flush
@@ -62,7 +62,7 @@ class SimplePoker::Combination
   end
 
   def set
-    card = kind_repeated(3)
+    card = kind_repeated(3).last
     if card
       kikers = kinds.select {|x| x != card}
       [
@@ -72,6 +72,25 @@ class SimplePoker::Combination
         weight_of(kikers[0])
       ].reduce(:+)
     end
+  end
+
+  def two_pairs
+    pairs = kind_repeated(2).uniq
+    if pairs.count == 2
+      kiker = kinds.select {|x| !pairs.include?(x)}.last
+      [
+        300000000,
+        1000000 * weight_of(pairs[1]),
+        10000 * weight_of(pairs[0]),
+        weight_of(kiker),
+      ].reduce(:+)
+    end
+  end
+
+  def pair
+  end
+
+  def high_card
   end
 
 end

@@ -22,7 +22,6 @@ class CombinationTest < Minitest::Test
   end
 
   def test_flush_weight
-    skip
     cards = [
       {:suit=>"hart", :kind=>"T"},
       {:suit=>"hart", :kind=>"K"},
@@ -76,6 +75,18 @@ class CombinationTest < Minitest::Test
     ].map {|h| SimplePoker::Card.new h}
     combination2 = SimplePoker::Combination.new(cards2)
     assert_equal 4_08_00_12_09, combination2.weight
+  end
+
+  def test_two_pair_weight
+    cards = [
+      {:suit=>"hart", :kind=>"A"},
+      {:suit=>"spade", :kind=>"A"},
+      {:suit=>"spade", :kind=>"K"},
+      {:suit=>"hart", :kind=>"K"},
+      {:suit=>"spade", :kind=>"9"}
+    ].map {|h| SimplePoker::Card.new h}
+    combination = SimplePoker::Combination.new(cards)
+    assert_equal 3_12_11_00_07, combination.weight
   end
 
 end
