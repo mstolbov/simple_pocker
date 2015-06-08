@@ -4,7 +4,6 @@ class SimplePoker::Game
   def initialize(players:, deck: SimplePoker::Deck.new)
     @players = players
     @deck = deck
-    @deck.shuffle!
   end
 
   def add_player(player)
@@ -17,6 +16,8 @@ class SimplePoker::Game
   end
 
   def deal_cards
+    @deck.shuffle!
+
     @common_cards = @deck.get_5_cards
 
     players.each do |player|
