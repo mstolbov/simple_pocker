@@ -7,13 +7,23 @@ class SimplePoker::Game
   end
 
   def deal_cards
-    players.each do |player|
-      player.cards = @deck.get_2_cards
-    end
     @common_cards = @deck.get_5_cards
+
+    players.each do |player|
+      player.personal_cards = @deck.get_2_cards
+      player.common_cards = @common_cards
+    end
   end
 
-  def find_winner
+  def determine_winner
+    determine_combinations
     players.first
+  end
+
+  private
+  def determine_combinations
+    players.each do |player|
+      player.combination = SimplePoker::Combination.determine(player.cards)
+    end
   end
 end

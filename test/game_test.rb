@@ -7,13 +7,20 @@ class GameTest < Minitest::Test
   end
 
   def test_deal_cards
-    assert @player.cards.nil?
+    assert @player.personal_cards.nil?
     assert @game.common_cards.nil?
 
     @game.deal_cards
 
-    assert !@player.cards.empty?
+    assert !@player.personal_cards.empty?
     assert !@game.common_cards.empty?
+  end
+
+  def test_determine_winner
+    @game.deal_cards
+
+    @game.determine_winner
+    @player.combination
   end
 
 end

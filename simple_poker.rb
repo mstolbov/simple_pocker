@@ -1,5 +1,5 @@
 class SimplePoker
-  %w(card deck player game).each do |f|
+  %w(card deck player game combination).each do |f|
     require_relative "simple_poker/#{f}"
   end
 
@@ -16,8 +16,7 @@ class SimplePoker
   end
 
   def run
-    @game.deal_cards
-
-    game.find_winner #test
+    game.deal_cards
+    game.determine_winner
   end
 end
