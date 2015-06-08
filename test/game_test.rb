@@ -47,4 +47,19 @@ class GameTest < Minitest::Test
     assert_equal :flush, @game.find_winner.combination.name
   end
 
+  def test_add_player
+    assert_equal 1, @game.players.count
+    @game.add_player SimplePoker::Player.new(name: "Sam")
+    assert_equal 2, @game.players.count
+  end
+
+  def test_remove_player_by_name
+    assert_equal 1, @game.players.count
+    @game.add_player SimplePoker::Player.new(name: "Sam")
+    assert_equal 2, @game.players.count
+
+    @game.remove_player_by_name "Sam"
+    assert_equal 1, @game.players.count
+  end
+
 end

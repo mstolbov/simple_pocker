@@ -11,6 +11,11 @@ class SimplePoker::Game
     @players << player
   end
 
+  def remove_player_by_name(name)
+    player = @players.find {|p| p.name == name}
+    @players.delete(player)
+  end
+
   def deal_cards
     @common_cards = @deck.get_5_cards
 
