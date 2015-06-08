@@ -1,5 +1,5 @@
 class SimplePoker::Game
-  attr_reader :players
+  attr_reader :players, :common_cards
 
   def initialize(players:, deck: SimplePoker::Deck.new)
     @players = players
